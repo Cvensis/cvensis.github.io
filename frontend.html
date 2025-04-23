@@ -1,0 +1,96 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend-розробник</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <nav class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Професії Майбутнього</h1>
+            <ul class="flex space-x-4">
+                <li><a href="index.html" class="hover:underline">Головна</a></li>
+                <li><a href="frontend.html" class="hover:underline">Frontend-розробник</a></li>
+                <li><a href="gamedesigner.html" class="hover:underline">Гейм-дизайнер</a></li>
+                <li><a href="uiux.html" class="hover:underline">UI/UX-дизайнер</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mx-auto py-8">
+        <h2 class="text-3xl font-bold text-center mb-6">Frontend-розробник</h2>
+        <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Frontend-розробник" class="mx-auto mb-6 rounded-lg shadow-md">
+        
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h3 class="text-xl font-semibold mb-2">Опис професії</h3>
+            <p class="text-gray-700">
+                Frontend-розробник відповідає за створення видимої частини вебсайтів і вебдодатків, з якою взаємодіють користувачі. Це включає розробку інтерфейсів, анімацій та оптимізацію для різних пристроїв. Вони працюють у тісній співпраці з дизайнерами та backend-розробниками, щоб забезпечити бездоганний користувацький досвід.
+            </p>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h3 class="text-xl font-semibold mb-2">Необхідні навички</h3>
+            <ul class="list-disc list-inside text-gray-700">
+                <li>Знання HTML, CSS і JavaScript</li>
+                <li>Робота з фреймворками, такими як React, Vue.js або Angular</li>
+                <li>Розуміння принципів адаптивного та респонсивного дизайну</li>
+                <li>Базові навички роботи з API та REST</li>
+                <li>Soft skills: комунікація, командна робота, вирішення проблем</li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h3 class="text-xl font-semibold mb-2">Як здобути навички</h3>
+            <p class="text-gray-700">
+                Я планую пройти онлайн-курси на платформах, таких як Udemy або freeCodeCamp, щоб освоїти HTML, CSS і JavaScript. Далі я вивчу React через офіційну документацію та практичні проєкти. Я також створю власні проєкти, такі як портфоліо або простий вебдодаток, і долучуся до open-source спільноти на GitHub для отримання реального досвіду. Крім того, я відвідуватиму локальні IT-мітапи для нетворкінгу та обміну знаннями.
+            </p>
+        </section>
+    </div>
+
+    <footer class="bg-gray-800 text-white text-center p-4">
+        <p>© 2025 Професії Майбутнього. Всі права захищено.</p>
+        <p>Контакти: <a href="mailto:mcholij185@sykhivsky.ukr.education" class="underline hover:text-blue-300">mcholij185@sykhivsky.ukr.education</a></p>
+    </footer>
+</body>
+</html>

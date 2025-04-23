@@ -1,0 +1,96 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гейм-дизайнер</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <nav class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Професії Майбутнього</h1>
+            <ul class="flex space-x-4">
+                <li><a href="index.html" class="hover:underline">Головна</a></li>
+                <li><a href="frontend.html" class="hover:underline">Frontend-розробник</a></li>
+                <li><a href="gamedesigner.html" class="hover:underline">Гейм-дизайнер</a></li>
+                <li><a href="uiux.html" class="hover:underline">UI/UX-дизайнер</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mx-auto py-8">
+        <h2 class="text-3xl font-bold text-center mb-6">Гейм-дизайнер</h2>
+        <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Гейм-дизайнер" class="mx-auto mb-6 rounded-lg shadow-md">
+        
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h3 class="text-xl font-semibold mb-2">Опис професії</h3>
+            <p class="text-gray-700">
+                Гейм-дизайнер створює концепції, механіки, сюжети та візуальні елементи для відеоігор. Вони відповідають за ігровий процес, баланс гри та залучення гравців. Ця професія поєднує творчість і технічні навички, адже гейм-дизайнер співпрацює з програмістами, художниками та продюсерами.
+            </p>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h3 class="text-xl font-semibold mb-2">Необхідні навички</h3>
+            <ul class="list-disc list-inside text-gray-700">
+                <li>Розуміння ігрових движків, таких як Unity або Unreal Engine</li>
+                <li>Базові навички програмування (C#, Lua)</li>
+                <li>Знання принципів гейм-дизайну та сторітелінгу</li>
+                <li>Креативність і вміння працювати в команді</li>
+                <li>Аналітичне мислення для тестування та балансування гри</li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h3 class="text-xl font-semibold mb-2">Як здобути навички</h3>
+            <p class="text-gray-700">
+                Я почну з вивчення основ Unity через безкоштовні туторіали на YouTube та офіційні курси Unity Learn. Далі я опаную C# за допомогою онлайн-курсів на Coursera. Я створюватиму невеликі ігри, такі як 2D-платформери, для практики. Також я планую брати участь у гейм-джемах, щоб працювати в команді та отримувати фідбек. Для розвитку креативності я читатиму книги про гейм-дизайн, наприклад, “The Art of Game Design” Джессі Шелла.
+            </p>
+        </section>
+    </div>
+
+    <footer class="bg-gray-800 text-white text-center p-4">
+        <p>© 2025 Професії Майбутнього. Всі права захищено.</p>
+        <p>Контакти: <a href="mailto:mcholij185@sykhivsky.ukr.education" class="underline hover:text-blue-300">mcholij185@sykhivsky.ukr.education</a></p>
+    </footer>
+</body>
+</html>
