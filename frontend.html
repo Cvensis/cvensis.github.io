@@ -46,53 +46,126 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575837721981316"
      crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: radial-gradient(circle at top, #0f172a 0%, #020617 50%, #000 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        .floating-nav {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45);
+        }
+        .content-card {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 32px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            box-shadow: 0 25px 55px rgba(56, 189, 248, 0.25);
+            backdrop-filter: blur(12px);
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 35px 70px rgba(59, 130, 246, 0.35);
+        }
+        .hero-img {
+            border-radius: 32px;
+            box-shadow: 0 35px 60px rgba(59, 130, 246, 0.4);
+            transform: perspective(900px) rotateY(-8deg) rotateX(4deg);
+            transition: transform 0.8s ease;
+        }
+        .hero-img:hover {
+            transform: perspective(900px) rotateY(0deg) rotateX(0deg) scale(1.02);
+        }
+        .section-title {
+            background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .floating-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.18), transparent 55%),
+                        radial-gradient(circle at 80% 30%, rgba(244, 114, 182, 0.18), transparent 55%),
+                        radial-gradient(circle at 50% 80%, rgba(56, 189, 248, 0.12), transparent 65%);
+            filter: blur(40px);
+            opacity: 0.9;
+            animation: float 22s ease-in-out infinite alternate;
+        }
+        @keyframes float {
+            from { transform: translate3d(-2%, -1%, 0); }
+            to { transform: translate3d(3%, 4%, 0); }
+        }
+    </style>
 </head>
-<body class="bg-gray-100 font-sans">
-    <nav class="bg-blue-600 text-white p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Професії Майбутнього</h1>
-            <ul class="flex space-x-4">
-                <li><a href="index.html" class="hover:underline">Головна</a></li>
-                <li><a href="frontend.html" class="hover:underline">Frontend-розробник</a></li>
-                <li><a href="gamedesigner.html" class="hover:underline">Гейм-дизайнер</a></li>
-                <li><a href="uiux.html" class="hover:underline">UI/UX-дизайнер</a></li>
+<body class="font-sans antialiased">
+    <div class="floating-bg"></div>
+    <nav class="floating-nav text-white sticky top-0 z-40">
+        <div class="container mx-auto flex flex-wrap justify-between items-center px-4 py-4">
+            <h1 class="text-2xl md:text-3xl font-bold tracking-wide">Професії Майбутнього</h1>
+            <ul class="flex flex-wrap gap-3 md:gap-6 text-sm md:text-base">
+                <li><a href="index.html" class="hover:text-sky-300 transition">Головна</a></li>
+                <li><a href="frontend.html" class="hover:text-sky-300 transition">Frontend</a></li>
+                <li><a href="gamedesigner.html" class="hover:text-sky-300 transition">Game Design</a></li>
+                <li><a href="uiux.html" class="hover:text-sky-300 transition">UI/UX</a></li>
+                <li><a href="index.html#gdz" class="hover:text-sky-300 transition">ГДЗ 9 клас</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="container mx-auto py-8">
-        <h2 class="text-3xl font-bold text-center mb-6">Frontend-розробник</h2>
-        <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Frontend-розробник" class="mx-auto mb-6 rounded-lg shadow-md">
-        
-        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h3 class="text-xl font-semibold mb-2">Опис професії</h3>
-            <p class="text-gray-700">
-                Frontend-розробник відповідає за створення видимої частини вебсайтів і вебдодатків, з якою взаємодіють користувачі. Це включає розробку інтерфейсів, анімацій та оптимізацію для різних пристроїв. Вони працюють у тісній співпраці з дизайнерами та backend-розробниками, щоб забезпечити бездоганний користувацький досвід.
+    <main class="relative z-10 container mx-auto px-6 py-16 space-y-12">
+        <header class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div class="space-y-5">
+                <p class="uppercase tracking-[0.35em] text-sm text-sky-300">Професійний всесвіт</p>
+                <h2 class="text-4xl md:text-5xl font-extrabold leading-tight section-title">Frontend-розробник</h2>
+                <p class="text-slate-200/80 text-lg">
+                    Інженер, який перетворює дизайн на живий інтерфейс. Завдяки вебтехнологіям він створює динамічні, доступні
+                    та емоційні продукти, що дарують користувачам комфорт у кожному кліку.
+                </p>
+            </div>
+            <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=760" alt="Frontend-розробник" class="hero-img w-full" loading="lazy">
+        </header>
+
+        <section class="content-card p-10">
+            <h3 class="text-2xl font-semibold mb-4 text-sky-200">Опис професії</h3>
+            <p class="text-slate-200/80 leading-relaxed">
+                Frontend-розробник відповідає за видиму частину вебсайтів і вебдодатків, з якою взаємодіють користувачі. Це
+                включає створення анімованих компонентів, роботу з адаптивною версткою, оптимізацію продуктивності та
+                доступність. Фахівці співпрацюють із дизайнерами, backend-командами й аналітиками, щоб забезпечити бездоганний
+                користувацький досвід.
             </p>
         </section>
 
-        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h3 class="text-xl font-semibold mb-2">Необхідні навички</h3>
-            <ul class="list-disc list-inside text-gray-700">
-                <li>Знання HTML, CSS і JavaScript</li>
-                <li>Робота з фреймворками, такими як React, Vue.js або Angular</li>
-                <li>Розуміння принципів адаптивного та респонсивного дизайну</li>
-                <li>Базові навички роботи з API та REST</li>
-                <li>Soft skills: комунікація, командна робота, вирішення проблем</li>
-            </ul>
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <article class="content-card p-10">
+                <h3 class="text-2xl font-semibold mb-4 text-sky-200">Необхідні навички</h3>
+                <ul class="space-y-3 text-slate-200/80">
+                    <li>Глибокі знання HTML5, CSS3, сучасного JavaScript та TypeScript.</li>
+                    <li>Досвід роботи з React, Vue або Angular та керування станом застосунків.</li>
+                    <li>Розуміння принципів адаптивного дизайну, доступності (a11y) і вебстандартів.</li>
+                    <li>Оптимізація продуктивності, налаштування CI/CD, тестування інтерфейсу.</li>
+                    <li>Командні навички: ефективна комунікація, гнучкість та вирішення проблем.</li>
+                </ul>
+            </article>
+            <article class="content-card p-10">
+                <h3 class="text-2xl font-semibold mb-4 text-sky-200">Як здобути навички</h3>
+                <p class="text-slate-200/80 leading-relaxed">
+                    Почни з курсів на freeCodeCamp, Udemy або Prometheus, паралельно виконуючи pet-проєкти: портфоліо,
+                    інтерактивні лендінги, панелі адміністратора. Вивчай офіційну документацію фреймворків, долучайся до open source
+                    на GitHub і відвідуй IT-спільноти. Роби код-рев'ю з менторами та впроваджуй тестування, щоб підвищити якість
+                    рішень.
+                </p>
+            </article>
         </section>
+    </main>
 
-        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h3 class="text-xl font-semibold mb-2">Як здобути навички</h3>
-            <p class="text-gray-700">
-                Я планую пройти онлайн-курси на платформах, таких як Udemy або freeCodeCamp, щоб освоїти HTML, CSS і JavaScript. Далі я вивчу React через офіційну документацію та практичні проєкти. Я також створю власні проєкти, такі як портфоліо або простий вебдодаток, і долучуся до open-source спільноти на GitHub для отримання реального досвіду. Крім того, я відвідуватиму локальні IT-мітапи для нетворкінгу та обміну знаннями.
-            </p>
-        </section>
-    </div>
-
-    <footer class="bg-gray-800 text-white text-center p-4">
-        <p>© 2025 Професії Майбутнього. Всі права захищено.</p>
-        <p>Контакти: <a href="mailto:mcholij185@sykhivsky.ukr.education" class="underline hover:text-blue-300">mcholij185@sykhivsky.ukr.education</a></p>
+    <footer class="relative z-10 bg-slate-950/70 text-slate-200 text-center p-8 border-t border-slate-700/40">
+        <p class="text-sm md:text-base">© 2025 Професії Майбутнього. Всі права захищено.</p>
+        <p class="text-sm md:text-base">Контакти: <a href="mailto:mcholij185@sykhivsky.ukr.education" class="underline hover:text-sky-300">mcholij185@sykhivsky.ukr.education</a></p>
     </footer>
 </body>
 </html>

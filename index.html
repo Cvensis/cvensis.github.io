@@ -46,50 +46,328 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575837721981316"
      crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: radial-gradient(circle at top, #1e3a8a 0%, #0f172a 45%, #020617 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .floating-nav {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45);
+        }
+        .hero {
+            position: relative;
+            overflow: hidden;
+        }
+        .orbital-system {
+            position: relative;
+            width: 340px;
+            height: 340px;
+            perspective: 900px;
+            transform-style: preserve-3d;
+            margin: 0 auto;
+        }
+        .planet {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-style: preserve-3d;
+            border-radius: 50%;
+            box-shadow: inset -25px -25px 60px rgba(15, 23, 42, 0.65), 0 12px 30px rgba(59, 130, 246, 0.45);
+            animation: spin 18s linear infinite;
+        }
+        .planet::after {
+            content: "";
+            position: absolute;
+            inset: -30px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.35), transparent 55%);
+            filter: blur(8px);
+        }
+        .planet-main {
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle at 35% 30%, #60a5fa 0%, #2563eb 45%, #1e3a8a 90%);
+            transform: translate3d(-50%, -50%, 0);
+        }
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            transform-style: preserve-3d;
+            border-radius: 50%;
+        }
+        .orbit .planet {
+            left: 100%;
+        }
+        .planet-ring {
+            width: 220px;
+            height: 220px;
+            border: 2px dashed rgba(148, 163, 184, 0.35);
+            animation: orbit 24s linear infinite;
+            box-shadow: none;
+        }
+        .planet-ring::after {
+            content: none;
+        }
+        .moon {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 40% 30%, #fde68a 0%, #f59e0b 55%, #b45309 95%);
+            transform: translate3d(-50%, -50%, 60px);
+            animation: spin 12s linear infinite reverse;
+            box-shadow: inset -15px -15px 30px rgba(120, 53, 15, 0.55), 0 10px 25px rgba(245, 158, 11, 0.5);
+        }
+        .moon-orbit {
+            width: 240px;
+            height: 240px;
+            border: 1px solid rgba(96, 165, 250, 0.25);
+            animation: orbit 16s linear infinite reverse;
+            box-shadow: none;
+        }
+        .moon-orbit::after {
+            content: none;
+        }
+        .planet-secondary {
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle at 30% 30%, #f472b6 0%, #db2777 50%, #831843 95%);
+            transform: translate3d(-50%, -50%, -80px);
+            animation: spin 20s linear infinite;
+            box-shadow: inset -18px -18px 36px rgba(76, 29, 149, 0.6), 0 12px 25px rgba(244, 114, 182, 0.45);
+        }
+        .planet-secondary-orbit {
+            width: 300px;
+            height: 300px;
+            border: 1px dashed rgba(244, 114, 182, 0.25);
+            animation: orbit 28s linear infinite;
+            box-shadow: none;
+        }
+        .planet-secondary-orbit::after {
+            content: none;
+        }
+        .starfield {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(1px 1px at 25px 35px, rgba(148, 163, 184, 0.85), transparent 60%),
+                radial-gradient(1px 1px at 85px 125px, rgba(191, 219, 254, 0.6), transparent 60%),
+                radial-gradient(1px 1px at 150px 75px, rgba(96, 165, 250, 0.55), transparent 60%),
+                radial-gradient(1px 1px at 210px 155px, rgba(244, 114, 182, 0.8), transparent 60%),
+                radial-gradient(1px 1px at 310px 45px, rgba(248, 250, 252, 0.7), transparent 60%);
+            animation: drift 40s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: translate3d(-50%, -50%, 0) rotateY(0deg); }
+            to { transform: translate3d(-50%, -50%, 0) rotateY(360deg); }
+        }
+        @keyframes orbit {
+            from { transform: translate3d(-50%, -50%, 0) rotateZ(0deg); }
+            to { transform: translate3d(-50%, -50%, 0) rotateZ(360deg); }
+        }
+        @keyframes drift {
+            from { transform: translate3d(0, 0, 0); }
+            to { transform: translate3d(-120px, -120px, 0); }
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            box-shadow: 0 24px 45px rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(14px);
+        }
+        .card-hover {
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 35px 60px rgba(14, 165, 233, 0.45);
+        }
+        .section-title {
+            background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .gdz-grid a {
+            position: relative;
+            overflow: hidden;
+        }
+        .gdz-grid a::before {
+            content: "";
+            position: absolute;
+            inset: -120%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.35) 0%, transparent 65%);
+            transform: scale(0);
+            transition: transform 0.7s ease;
+        }
+        .gdz-grid a:hover::before {
+            transform: scale(1);
+        }
+        .aurora {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: conic-gradient(from 180deg at 50% 20%, rgba(59, 130, 246, 0.45), rgba(236, 72, 153, 0.35), rgba(129, 140, 248, 0.5), rgba(56, 189, 248, 0.35), rgba(59, 130, 246, 0.45));
+            filter: blur(90px);
+            opacity: 0.6;
+            animation: auroraShift 26s ease-in-out infinite alternate;
+        }
+        @keyframes auroraShift {
+            from { transform: translate3d(-15%, -10%, 0) rotate(0deg); }
+            to { transform: translate3d(10%, 15%, 0) rotate(12deg); }
+        }
+    </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="font-sans antialiased">
+    <div class="aurora"></div>
     <!-- Навігація -->
-    <nav class="bg-blue-600 text-white p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Професії Майбутнього</h1>
-            <ul class="flex space-x-4">
-                <li><a href="index.html" class="hover:underline">Головна</a></li>
-                <li><a href="frontend.html" class="hover:underline">Frontend-розробник</a></li>
-                <li><a href="gamedesigner.html" class="hover:underline">Гейм-дизайнер</a></li>
-                <li><a href="uiux.html" class="hover:underline">UI/UX-дизайнер</a></li>
+    <nav class="floating-nav text-white sticky top-0 z-40">
+        <div class="container mx-auto flex flex-wrap justify-between items-center px-4 py-4">
+            <h1 class="text-2xl md:text-3xl font-bold tracking-wide">Професії Майбутнього</h1>
+            <ul class="flex flex-wrap gap-3 md:gap-6 text-sm md:text-base">
+                <li><a href="#hero" class="hover:text-sky-300 transition">Головна</a></li>
+                <li><a href="#careers" class="hover:text-sky-300 transition">Професії</a></li>
+                <li><a href="#gdz" class="hover:text-sky-300 transition">ГДЗ 9 клас</a></li>
+                <li><a href="frontend.html" class="hover:text-sky-300 transition">Frontend</a></li>
+                <li><a href="gamedesigner.html" class="hover:text-sky-300 transition">Game Design</a></li>
+                <li><a href="uiux.html" class="hover:text-sky-300 transition">UI/UX</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Головна сторінка -->
-    <div class="container mx-auto py-8">
-        <h2 class="text-3xl font-bold text-center mb-6">Ласкаво просимо!</h2>
-        <p class="text-lg text-gray-700 mb-4">
-            Цей сайт присвячений професіям майбутнього в галузі інформаційних технологій. Дізнайтесь про захоплюючі кар’єрні можливості у сфері програмування, дизайну та геймінгу!
-        </p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold mb-2">Frontend-розробник</h3>
-                <p class="text-gray-600 mb-4">Створює інтерактивні та привабливі інтерфейси для вебсайтів.</p>
-                <a href="frontend.html" class="text-blue-600 hover:underline">Дізнатись більше</a>
+    <section id="hero" class="hero relative py-24 md:py-32">
+        <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6 relative z-10">
+                <p class="uppercase tracking-[0.35em] text-sm md:text-base text-sky-300">Майбутнє починається тут</p>
+                <h2 class="text-4xl md:text-5xl xl:text-6xl font-extrabold leading-tight section-title">Технології, що формують твій завтра</h2>
+                <p class="text-slate-200 text-lg md:text-xl leading-relaxed">
+                    Відкрий для себе всесвіт сучасних IT-професій, надихнись історіями успіху та обери власну орбіту розвитку.
+                    Космічна система 3D-планет зустрічає тебе на старті до великої подорожі у світ знань.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#careers" class="px-6 py-3 rounded-full bg-sky-500 hover:bg-sky-400 transition shadow-lg shadow-sky-500/50">Дослідити професії</a>
+                    <a href="#gdz" class="px-6 py-3 rounded-full bg-transparent border border-sky-400 hover:bg-sky-400/10 transition">Переглянути ГДЗ</a>
+                </div>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold mb-2">Гейм-дизайнер</h3>
-                <p class="text-gray-600 mb-4">Проектує ігрові світи, механіки та історії для відеоігор.</p>
-                <a href="gamedesigner.html" class="text-blue-600 hover:underline">Дізнатись більше</a>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold mb-2">UI/UX-дизайнер</h3>
-                <p class="text-gray-600 mb-4">Розробляє зручні та естетичні інтерфейси для додатків і сайтів.</p>
-                <a href="uiux.html" class="text-blue-600 hover:underline">Дізнатись більше</a>
+            <div class="relative">
+                <div class="orbital-system">
+                    <div class="starfield"></div>
+                    <div class="planet planet-main"></div>
+                    <div class="orbit planet-ring"></div>
+                    <div class="orbit planet-secondary-orbit">
+                        <div class="planet planet-secondary"></div>
+                    </div>
+                    <div class="orbit moon-orbit">
+                        <div class="planet moon"></div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <section id="careers" class="relative z-10 pb-24">
+        <div class="container mx-auto px-6">
+            <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title">Яскраві орбіти професій</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                <article class="glass-panel rounded-3xl p-8 card-hover">
+                    <h4 class="text-2xl font-semibold mb-4 text-sky-200">Frontend-розробник</h4>
+                    <p class="text-slate-200/80 mb-6">
+                        Створює інтерактивні інтерфейси, забезпечує плавні анімації та адаптивний дизайн для кожного користувача.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sky-300">HTML • CSS • React</span>
+                        <a href="frontend.html" class="text-sky-200 hover:text-sky-100 transition">Дізнатись більше →</a>
+                    </div>
+                </article>
+                <article class="glass-panel rounded-3xl p-8 card-hover">
+                    <h4 class="text-2xl font-semibold mb-4 text-sky-200">Гейм-дизайнер</h4>
+                    <p class="text-slate-200/80 mb-6">
+                        Продумує механіки та історії, що занурюють гравців у нові всесвіти й пробуджують справжні емоції.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sky-300">Unity • Narrative • Balance</span>
+                        <a href="gamedesigner.html" class="text-sky-200 hover:text-sky-100 transition">Дізнатись більше →</a>
+                    </div>
+                </article>
+                <article class="glass-panel rounded-3xl p-8 card-hover">
+                    <h4 class="text-2xl font-semibold mb-4 text-sky-200">UI/UX-дизайнер</h4>
+                    <p class="text-slate-200/80 mb-6">
+                        Формує естетичні та інтуїтивні продукти, в центрі яких людський досвід та інклюзивність.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sky-300">Figma • User Research</span>
+                        <a href="uiux.html" class="text-sky-200 hover:text-sky-100 transition">Дізнатись більше →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="gdz" class="relative z-10 pb-24">
+        <div class="container mx-auto px-6">
+            <h3 class="text-3xl md:text-4xl font-bold text-center mb-4 section-title">ГДЗ для 9 класу</h3>
+            <p class="text-center text-slate-200/80 max-w-3xl mx-auto mb-12">
+                Добірка популярних ГДЗ українською мовою для основних шкільних предметів. Обирай предмет і переходь до рішень,
+                щоб перевірити знання та підготуватися до контрольних робіт.
+            </p>
+            <div class="gdz-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                <a href="https://gdz-online.com.ua/9-klas/algebra" target="_blank" rel="noopener" class="glass-panel rounded-3xl p-7 flex flex-col gap-4 card-hover">
+                    <div>
+                        <h4 class="text-2xl font-semibold text-sky-200">Алгебра</h4>
+                        <p class="text-slate-200/80">Повні рішення до підручників Мерзляка, Тарасенкової та інших авторів.</p>
+                    </div>
+                    <span class="text-sky-300">Перейти до ГДЗ →</span>
+                </a>
+                <a href="https://gdz-online.com.ua/9-klas/geometriya" target="_blank" rel="noopener" class="glass-panel rounded-3xl p-7 flex flex-col gap-4 card-hover">
+                    <div>
+                        <h4 class="text-2xl font-semibold text-sky-200">Геометрія</h4>
+                        <p class="text-slate-200/80">Доведення, креслення та задачі з основними теоремами 9 класу.</p>
+                    </div>
+                    <span class="text-sky-300">Перейти до ГДЗ →</span>
+                </a>
+                <a href="https://gdz-online.com.ua/9-klas/ukrayinska-mova" target="_blank" rel="noopener" class="glass-panel rounded-3xl p-7 flex flex-col gap-4 card-hover">
+                    <div>
+                        <h4 class="text-2xl font-semibold text-sky-200">Українська мова</h4>
+                        <p class="text-slate-200/80">Вправи з граматики, синтаксису та орфографії з поясненнями.</p>
+                    </div>
+                    <span class="text-sky-300">Перейти до ГДЗ →</span>
+                </a>
+                <a href="https://gdz-online.com.ua/9-klas/ukrayinska-literatura" target="_blank" rel="noopener" class="glass-panel rounded-3xl p-7 flex flex-col gap-4 card-hover">
+                    <div>
+                        <h4 class="text-2xl font-semibold text-sky-200">Українська література</h4>
+                        <p class="text-slate-200/80">Стислий зміст творів, аналіз та відповіді на питання після тексту.</p>
+                    </div>
+                    <span class="text-sky-300">Перейти до ГДЗ →</span>
+                </a>
+                <a href="https://gdz-online.com.ua/9-klas/istorija-ukrainy" target="_blank" rel="noopener" class="glass-panel rounded-3xl p-7 flex flex-col gap-4 card-hover">
+                    <div>
+                        <h4 class="text-2xl font-semibold text-sky-200">Історія України</h4>
+                        <p class="text-slate-200/80">Події, карти та тести для ґрунтовної підготовки з історії.</p>
+                    </div>
+                    <span class="text-sky-300">Перейти до ГДЗ →</span>
+                </a>
+                <a href="https://gdz-online.com.ua/9-klas/angliiska-mova" target="_blank" rel="noopener" class="glass-panel rounded-3xl p-7 flex flex-col gap-4 card-hover">
+                    <div>
+                        <h4 class="text-2xl font-semibold text-sky-200">Англійська мова</h4>
+                        <p class="text-slate-200/80">Граматика, аудіювання та письмові завдання з ключами.</p>
+                    </div>
+                    <span class="text-sky-300">Перейти до ГДЗ →</span>
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- Футер -->
-    <footer class="bg-gray-800 text-white text-center p-4 mt-8">
-        <p>© 2025 Професії Майбутнього. Всі права захищено.</p>
-        <p>Контакти: <a href="mailto:mcholij185@sykhivsky.ukr.education" class="underline hover:text-blue-300">mcholij185@sykhivsky.ukr.education</a></p>
+    <footer class="relative z-10 bg-slate-950/70 text-slate-200 text-center p-8 border-t border-slate-700/40">
+        <p class="text-sm md:text-base">© 2025 Професії Майбутнього. Всі права захищено.</p>
+        <p class="text-sm md:text-base">Контакти: <a href="mailto:mcholij185@sykhivsky.ukr.education" class="underline hover:text-sky-300">mcholij185@sykhivsky.ukr.education</a></p>
     </footer>
 </body>
 </html>

@@ -46,53 +46,188 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575837721981316"
      crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: linear-gradient(140deg, #0f172a 0%, #1f2937 45%, #111827 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .floating-nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            box-shadow: 0 25px 55px rgba(99, 102, 241, 0.35);
+        }
+        .aurora {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: conic-gradient(from 120deg at 30% 20%, rgba(56, 189, 248, 0.3), rgba(129, 140, 248, 0.35), rgba(244, 114, 182, 0.25), rgba(56, 189, 248, 0.2));
+            filter: blur(90px);
+            opacity: 0.8;
+            animation: aurora 32s ease-in-out infinite alternate;
+        }
+        @keyframes aurora {
+            from { transform: translate3d(-5%, -3%, 0) rotate(-4deg); }
+            to { transform: translate3d(6%, 4%, 0) rotate(6deg); }
+        }
+        .content-card {
+            background: rgba(15, 23, 42, 0.65);
+            border-radius: 32px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            box-shadow: 0 30px 70px rgba(129, 140, 248, 0.25);
+            backdrop-filter: blur(16px);
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 40px 90px rgba(244, 114, 182, 0.3);
+        }
+        .hero-device {
+            position: relative;
+            border-radius: 38px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(244, 114, 182, 0.2));
+            box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.25), 0 45px 90px rgba(79, 70, 229, 0.35);
+        }
+        .device-screen {
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 45px rgba(59, 130, 246, 0.3);
+        }
+        .device-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.04);
+            transition: transform 10s ease;
+        }
+        .device-screen:hover img {
+            transform: scale(1.1);
+        }
+        .section-title {
+            background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #c084fc 75%, #f472b6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .grid-highlight {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+        .grid-highlight div {
+            background: rgba(30, 41, 59, 0.65);
+            border-radius: 24px;
+            padding: 1.75rem;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            transition: transform 0.5s ease;
+        }
+        .grid-highlight div:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(125, 211, 252, 0.25);
+            font-size: 0.85rem;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 font-sans">
-    <nav class="bg-blue-600 text-white p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Професії Майбутнього</h1>
-            <ul class="flex space-x-4">
-                <li><a href="index.html" class="hover:underline">Головна</a></li>
-                <li><a href="frontend.html" class="hover:underline">Frontend-розробник</a></li>
-                <li><a href="gamedesigner.html" class="hover:underline">Гейм-дизайнер</a></li>
-                <li><a href="uiux.html" class="hover:underline">UI/UX-дизайнер</a></li>
+<body class="font-sans antialiased">
+    <div class="aurora"></div>
+    <nav class="floating-nav text-white sticky top-0 z-40">
+        <div class="container mx-auto flex flex-wrap justify-between items-center px-4 py-4">
+            <h1 class="text-2xl md:text-3xl font-bold tracking-wide">Професії Майбутнього</h1>
+            <ul class="flex flex-wrap gap-3 md:gap-6 text-sm md:text-base">
+                <li><a href="index.html" class="hover:text-indigo-300 transition">Головна</a></li>
+                <li><a href="frontend.html" class="hover:text-indigo-300 transition">Frontend</a></li>
+                <li><a href="gamedesigner.html" class="hover:text-indigo-300 transition">Game Design</a></li>
+                <li><a href="uiux.html" class="hover:text-indigo-300 transition">UI/UX</a></li>
+                <li><a href="index.html#gdz" class="hover:text-indigo-300 transition">ГДЗ 9 клас</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="container mx-auto py-8">
-        <h2 class="text-3xl font-bold text-center mb-6">UI/UX-дизайнер</h2>
-        <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=500" alt="UI/UX-дизайнер" class="mx-auto mb-6 rounded-lg shadow-md">
-        
-        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h3 class="text-xl font-semibold mb-2">Опис професії</h3>
-            <p class="text-gray-700">
-                UI/UX-дизайнер відповідає за створення зручних і привабливих інтерфейсів для вебсайтів і додатків. UI (User Interface) фокусується на візуальному дизайні, а UX (User Experience) — на зручності та логіці взаємодії. Вони проводять дослідження, створюють прототипи та тестують продукти.
-            </p>
+    <main class="relative z-10 container mx-auto px-6 py-16 space-y-12">
+        <header class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-5">
+                <p class="uppercase tracking-[0.35em] text-sm text-indigo-300">Дизайн людського досвіду</p>
+                <h2 class="text-4xl md:text-5xl font-extrabold leading-tight section-title">UI/UX-дизайнер</h2>
+                <p class="text-slate-200/80 text-lg">
+                    Фахівець, який з'єднує естетику та функціональність. UI/UX-дизайнер досліджує потреби людей, створює
+                    прототипи, тестує гіпотези та забезпечує інклюзивність цифрових продуктів.
+                </p>
+            </div>
+            <div class="hero-device">
+                <div class="device-screen">
+                    <img src="https://images.pexels.com/photos/1181243/pexels-photo-1181243.jpeg?auto=compress&cs=tinysrgb&w=760" alt="UI/UX дизайн" loading="lazy">
+                </div>
+            </div>
+        </header>
+
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <article class="content-card p-10">
+                <h3 class="text-2xl font-semibold mb-4 text-indigo-200">Роль у команді</h3>
+                <p class="text-slate-200/80 leading-relaxed">
+                    UI/UX-дизайнер збирає інсайти про користувачів, планує сценарії використання, створює вайрфрейми, прототипи
+                    та візуальну систему продукту. Він забезпечує доступність, тестує гіпотези й транслює результати команді.
+                </p>
+            </article>
+            <article class="content-card p-10">
+                <h3 class="text-2xl font-semibold mb-4 text-indigo-200">Ключові навички</h3>
+                <div class="grid-highlight mt-6">
+                    <div>
+                        <span class="chip text-sky-200">Дослідження</span>
+                        <p class="mt-3 text-slate-200/80">Інтерв'ю, опитування, usability-тести, аналіз поведінки.</p>
+                    </div>
+                    <div>
+                        <span class="chip text-sky-200">Прототипування</span>
+                        <p class="mt-3 text-slate-200/80">Figma, FigJam, Marvel, інтерактивні сценарії.</p>
+                    </div>
+                    <div>
+                        <span class="chip text-sky-200">Візуальна мова</span>
+                        <p class="mt-3 text-slate-200/80">Система кольорів, типографіка, дизайн-системи.</p>
+                    </div>
+                    <div>
+                        <span class="chip text-sky-200">Комунікація</span>
+                        <p class="mt-3 text-slate-200/80">Фасилітація воркшопів, робота з продукт-менеджерами, девами.</p>
+                    </div>
+                </div>
+            </article>
         </section>
 
-        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h3 class="text-xl font-semibold mb-2">Необхідні навички</h3>
-            <ul class="list-disc list-inside text-gray-700">
-                <li>Володіння інструментами дизайну (Figma, Adobe XD, Sketch)</li>
-                <li>Розуміння принципів дизайну та теорії кольорів</li>
-                <li>Навички прототипування та тестування користувачів</li>
-                <li>Базові знання HTML/CSS для співпраці з розробниками</li>
-                <li>Емпатія та аналітичне мислення</li>
-            </ul>
+        <section class="content-card p-10">
+            <h3 class="text-2xl font-semibold mb-4 text-indigo-200">План розвитку</h3>
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="space-y-3">
+                    <h4 class="text-xl font-semibold text-white">1. Фундамент</h4>
+                    <p class="text-slate-200/80">Вивчай дизайн-мислення, принципи гештальту, accessibility. Аналізуй продукти, які любиш.</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="text-xl font-semibold text-white">2. Практика</h4>
+                    <p class="text-slate-200/80">Створюй мобільні й веб-прототипи, проводь тестування, збирай фідбек, покращуй ітераціями.</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="text-xl font-semibold text-white">3. Портфоліо</h4>
+                    <p class="text-slate-200/80">Описуй кейси за структурою: проблема, процес, рішення, результати. Додавай дослідження та метрики.</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="text-xl font-semibold text-white">4. Ком'юніті</h4>
+                    <p class="text-slate-200/80">Долучайся до локальних подій, хакатонів, спільнот у Slack/Discord. Обмінюйся досвідом і знайомся з менторами.</p>
+                </div>
+            </div>
         </section>
+    </main>
 
-        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h3 class="text-xl font-semibold mb-2">Як здобути навички</h3>
-            <p class="text-gray-700">
-                Я почну з курсів по UI/UX-дизайну на Coursera або Interaction Design Foundation. Я вивчу Figma через безкоштовні туторіали та створюватиму прототипи додатків. Для практики я перероблятиму дизайни існуючих сайтів, аналізуючи їхні слабкі сторони. Я також долучуся до спільнот, таких як Dribbble, для отримання фідбеку. Щоб розвинути софт-скіли, я братиму участь у воркшопах з дизайн-мислення.
-            </p>
-        </section>
-    </div>
-
-    <footer class="bg-gray-800 text-white text-center p-4">
-        <p>© 2025 Професії Майбутнього. Всі права захищено.</p>
-        <p>Контакти: <a href="mailto:mcholij185@sykhivsky.ukr.education" class="underline hover:text-blue-300">mcholij185@sykhivsky.ukr.education</a></p>
+    <footer class="relative z-10 bg-slate-950/70 text-slate-200 text-center p-8 border-t border-slate-700/40">
+        <p class="text-sm md:text-base">© 2025 Професії Майбутнього. Всі права захищено.</p>
+        <p class="text-sm md:text-base">Контакти: <a href="mailto:mcholij185@sykhivsky.ukr.education" class="underline hover:text-indigo-300">mcholij185@sykhivsky.ukr.education</a></p>
     </footer>
 </body>
 </html>

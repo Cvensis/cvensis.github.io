@@ -46,53 +46,189 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575837721981316"
      crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: radial-gradient(circle at top, #1f2937 0%, #0f172a 45%, #020617 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .floating-nav {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45);
+        }
+        .nebula {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 30% 25%, rgba(248, 113, 113, 0.25), transparent 65%),
+                        radial-gradient(circle at 75% 30%, rgba(251, 191, 36, 0.25), transparent 60%),
+                        radial-gradient(circle at 45% 80%, rgba(96, 165, 250, 0.18), transparent 60%);
+            filter: blur(60px);
+            opacity: 0.9;
+            animation: pulse 28s ease-in-out infinite alternate;
+        }
+        @keyframes pulse {
+            from { transform: translate3d(-2%, -3%, 0) scale(1); }
+            to { transform: translate3d(2%, 4%, 0) scale(1.08); }
+        }
+        .content-card {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 32px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            box-shadow: 0 30px 70px rgba(251, 191, 36, 0.2);
+            backdrop-filter: blur(14px);
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 40px 90px rgba(248, 113, 113, 0.35);
+        }
+        .hero-grid {
+            position: relative;
+        }
+        .hero-art {
+            position: relative;
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 35px 70px rgba(59, 130, 246, 0.35);
+        }
+        .hero-art::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(8, 47, 73, 0.6), rgba(15, 118, 110, 0.3));
+            mix-blend-mode: screen;
+        }
+        .hero-art img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.05);
+            transition: transform 12s ease;
+        }
+        .hero-art:hover img {
+            transform: scale(1.1) rotate(1deg);
+        }
+        .section-title {
+            background: linear-gradient(90deg, #fbbf24 0%, #fb7185 50%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, rgba(251, 191, 36, 0.35), rgba(56, 189, 248, 0.35));
+        }
+        .timeline-step {
+            position: relative;
+            padding-left: 3.5rem;
+        }
+        .timeline-step::before {
+            content: "";
+            position: absolute;
+            left: 0.75rem;
+            top: 0.75rem;
+            width: 0.85rem;
+            height: 0.85rem;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, #fb7185, #f97316);
+            box-shadow: 0 0 20px rgba(251, 146, 60, 0.6);
+        }
+    </style>
 </head>
-<body class="bg-gray-100 font-sans">
-    <nav class="bg-blue-600 text-white p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Професії Майбутнього</h1>
-            <ul class="flex space-x-4">
-                <li><a href="index.html" class="hover:underline">Головна</a></li>
-                <li><a href="frontend.html" class="hover:underline">Frontend-розробник</a></li>
-                <li><a href="gamedesigner.html" class="hover:underline">Гейм-дизайнер</a></li>
-                <li><a href="uiux.html" class="hover:underline">UI/UX-дизайнер</a></li>
+<body class="font-sans antialiased">
+    <div class="nebula"></div>
+    <nav class="floating-nav text-white sticky top-0 z-40">
+        <div class="container mx-auto flex flex-wrap justify-between items-center px-4 py-4">
+            <h1 class="text-2xl md:text-3xl font-bold tracking-wide">Професії Майбутнього</h1>
+            <ul class="flex flex-wrap gap-3 md:gap-6 text-sm md:text-base">
+                <li><a href="index.html" class="hover:text-amber-300 transition">Головна</a></li>
+                <li><a href="frontend.html" class="hover:text-amber-300 transition">Frontend</a></li>
+                <li><a href="gamedesigner.html" class="hover:text-amber-300 transition">Game Design</a></li>
+                <li><a href="uiux.html" class="hover:text-amber-300 transition">UI/UX</a></li>
+                <li><a href="index.html#gdz" class="hover:text-amber-300 transition">ГДЗ 9 клас</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="container mx-auto py-8">
-        <h2 class="text-3xl font-bold text-center mb-6">Гейм-дизайнер</h2>
-        <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Гейм-дизайнер" class="mx-auto mb-6 rounded-lg shadow-md">
-        
-        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h3 class="text-xl font-semibold mb-2">Опис професії</h3>
-            <p class="text-gray-700">
-                Гейм-дизайнер створює концепції, механіки, сюжети та візуальні елементи для відеоігор. Вони відповідають за ігровий процес, баланс гри та залучення гравців. Ця професія поєднує творчість і технічні навички, адже гейм-дизайнер співпрацює з програмістами, художниками та продюсерами.
-            </p>
+    <main class="relative z-10 container mx-auto px-6 py-16 space-y-12">
+        <header class="hero-grid grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-5">
+                <p class="uppercase tracking-[0.35em] text-sm text-amber-300">Створи власний світ</p>
+                <h2 class="text-4xl md:text-5xl font-extrabold leading-tight section-title">Гейм-дизайнер</h2>
+                <p class="text-slate-200/80 text-lg">
+                    Архітектор ігрових всесвітів, який формує історії, механіки та досвід. Гейм-дизайнер поєднує творчість,
+                    аналітику і технології, щоб подарувати гравцям незабутні пригоди.
+                </p>
+            </div>
+            <div class="hero-art">
+                <img src="https://images.pexels.com/photos/907173/pexels-photo-907173.jpeg?auto=compress&cs=tinysrgb&w=760" alt="Гейм-дизайнер за роботою" loading="lazy">
+            </div>
+        </header>
+
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <article class="content-card p-10">
+                <h3 class="text-2xl font-semibold mb-4 text-amber-200">Що робить гейм-дизайнер</h3>
+                <p class="text-slate-200/80 leading-relaxed">
+                    Працює з геймплеєм, рівнями, персонажами, балансує економіку гри, готує документацію для команди. Він
+                    допомагає художникам, програмістам та сценаристам рухатися в одному напрямку і створювати цілісний досвід.
+                </p>
+            </article>
+            <article class="content-card p-10">
+                <h3 class="text-2xl font-semibold mb-4 text-amber-200">Інструменти</h3>
+                <ul class="space-y-3 text-slate-200/80">
+                    <li>Ігрові рушії: Unity, Unreal Engine, Godot.</li>
+                    <li>Документація та діаграми: Notion, Miro, Figma.</li>
+                    <li>Аналіз даних: Excel, Google Sheets, Power BI.</li>
+                    <li>Прототипування механік у Construct, GameMaker або Python.</li>
+                </ul>
+            </article>
+            <article class="content-card p-10">
+                <h3 class="text-2xl font-semibold mb-4 text-amber-200">Soft skills</h3>
+                <ul class="space-y-3 text-slate-200/80">
+                    <li>Комунікація з командою й користувачами.</li>
+                    <li>Креативність та вміння створювати емоційні історії.</li>
+                    <li>Критичне мислення та ітеративне тестування.</li>
+                    <li>Організація процесів, тайм-менеджмент, презентації.</li>
+                </ul>
+            </article>
         </section>
 
-        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h3 class="text-xl font-semibold mb-2">Необхідні навички</h3>
-            <ul class="list-disc list-inside text-gray-700">
-                <li>Розуміння ігрових движків, таких як Unity або Unreal Engine</li>
-                <li>Базові навички програмування (C#, Lua)</li>
-                <li>Знання принципів гейм-дизайну та сторітелінгу</li>
-                <li>Креативність і вміння працювати в команді</li>
-                <li>Аналітичне мислення для тестування та балансування гри</li>
-            </ul>
+        <section class="content-card p-10 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-rose-500/10 to-sky-500/10 pointer-events-none"></div>
+            <h3 class="text-2xl font-semibold mb-4 text-amber-200">Шлях розвитку</h3>
+            <div class="timeline relative mt-8">
+                <div class="timeline-step mb-10">
+                    <h4 class="text-xl font-semibold text-white">1. Базові знання</h4>
+                    <p class="text-slate-200/80">Вивчай теорію ігор, психологію мотивації, механіки й жанри. Читай книги Джессі Шелла, Ернеста Адамса.</p>
+                </div>
+                <div class="timeline-step mb-10">
+                    <h4 class="text-xl font-semibold text-white">2. Прототипи</h4>
+                    <p class="text-slate-200/80">Створюй мікропроєкти у Unity чи Godot, експериментуй із рівнями, наративом, геймплеєм. Тестуй з друзями.</p>
+                </div>
+                <div class="timeline-step mb-10">
+                    <h4 class="text-xl font-semibold text-white">3. Портфоліо</h4>
+                    <p class="text-slate-200/80">Оформлюй документи GDD, записуй геймплей, додавай аналіз метрик. Бери участь у геймджемах itch.io або Ludum Dare.</p>
+                </div>
+                <div class="timeline-step">
+                    <h4 class="text-xl font-semibold text-white">4. Кар'єра</h4>
+                    <p class="text-slate-200/80">Стажуйся в indie-студіях, долучайся до open source ігор, шукай junior-позиції та покращуй soft skills.</p>
+                </div>
+            </div>
         </section>
+    </main>
 
-        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h3 class="text-xl font-semibold mb-2">Як здобути навички</h3>
-            <p class="text-gray-700">
-                Я почну з вивчення основ Unity через безкоштовні туторіали на YouTube та офіційні курси Unity Learn. Далі я опаную C# за допомогою онлайн-курсів на Coursera. Я створюватиму невеликі ігри, такі як 2D-платформери, для практики. Також я планую брати участь у гейм-джемах, щоб працювати в команді та отримувати фідбек. Для розвитку креативності я читатиму книги про гейм-дизайн, наприклад, “The Art of Game Design” Джессі Шелла.
-            </p>
-        </section>
-    </div>
-
-    <footer class="bg-gray-800 text-white text-center p-4">
-        <p>© 2025 Професії Майбутнього. Всі права захищено.</p>
-        <p>Контакти: <a href="mailto:mcholij185@sykhivsky.ukr.education" class="underline hover:text-blue-300">mcholij185@sykhivsky.ukr.education</a></p>
+    <footer class="relative z-10 bg-slate-950/70 text-slate-200 text-center p-8 border-t border-slate-700/40">
+        <p class="text-sm md:text-base">© 2025 Професії Майбутнього. Всі права захищено.</p>
+        <p class="text-sm md:text-base">Контакти: <a href="mailto:mcholij185@sykhivsky.ukr.education" class="underline hover:text-amber-300">mcholij185@sykhivsky.ukr.education</a></p>
     </footer>
 </body>
 </html>
